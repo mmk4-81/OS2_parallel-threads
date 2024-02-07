@@ -30,6 +30,7 @@ int main()
     cout << "Enter runtime (seconds): ";
     cin >> runtime;
 
+    int threadCount = thread::hardware_concurrency();
 
 
 
