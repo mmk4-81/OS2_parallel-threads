@@ -97,6 +97,54 @@ int main()
     {
         CloseHandle(threadHandle[i]);
     }
+
+    double *bestResult = nullptr;
+    int sum[3] = {0};
+    DWORD besttid = result[0][0];
+    double bestDiff = -1;
+
+    cout << "Note: boy1 => 0  **** boy2 => 1  **** girl => 2\n\n";
+
+    for (int i = 0; i < threadCount; i++)
+    {
+
+        double *currentResult = result[i];
+
+        double currentDiff = abs(currentResult[DataSize + 1] - 0.4 * totalLands) + abs(currentResult[DataSize + 2] - 0.4 * totalLands) + abs(currentResult[DataSize + 3] - 0.2 * totalLands);
+
+        DWORD threadID = threadParams[i].threadID;
+
+        cout << "Thread " << i + 1 << " (Thread ID = " << threadID << ") >>\n [ ";
+        for (int j = 0; j < DataSize; j++)
+        {
+            cout << Lands[j] << "(" << currentResult[j + 1] << ") , ";
+        }
+        cout << " ] \n ";
+        cout << "boy1 => " << currentResult[DataSize + 1] << " ****  boy2 => " << currentResult[DataSize + 2]
+             << " ****  girl => " << currentResult[DataSize + 3];
+        cout << " **** F => " << currentDiff;
+        cout << endl;
+        cout << "-------------------------------------------------------------------------------------------------------------------\n";
+
+        if (currentDiff < bestDiff || bestDiff == -1)
+        {
+            bestDiff = currentDiff;
+            bestResult = currentResult;
+            besttid = threadID;
+        }
+    }
+
+    cout << "\n\nBest Thread ID (" << besttid << ") => f = " << bestDiff << endl;
+
+    delete[] threadParams;
+    delete[] threadHandle;
+    delete[] Lands;
+    for (int i = 0; i < threadCount; i++)
+    {
+        delete[] result[i];
+    }
+    delete[] result;
+
     return 0;
 }
 
