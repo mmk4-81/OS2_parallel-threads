@@ -92,10 +92,14 @@ int main()
         }
     }
 
+    WaitForMultipleObjects(threadCount, threadHandle, TRUE, INFINITE);
+    for (int i = 0; i < threadCount; i++)
+    {
+        CloseHandle(threadHandle[i]);
+    }
     return 0;
 }
 
-
-DWORD WINAPI F(LPVOID param) {
-    
+DWORD WINAPI F(LPVOID param)
+{
 }
