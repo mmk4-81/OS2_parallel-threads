@@ -14,6 +14,8 @@ using namespace std::chrono;
 double runtime = 0;
 int DataSize = 0;
 double totalLands = 0;
+double** result;
+double* Lands;
 
 int main()
 {
@@ -44,7 +46,26 @@ int main()
          << "dataset " << filename << " with " << DataSize << " records and runtime " << runtime << " seconds and with " << threadCount << " threads" << endl
          << endl;
 
+    Lands = new double[DataSize];
 
+    file.clear();
+    file.seekg(0, ios::beg);
 
+    for (int i = 0; i < DataSize; i++)
+    {
+        file >> Lands[i];
+    }
+    file.close();
+
+    result = new double *[threadCount];
+    for (int i = 0; i < threadCount; i++)
+    {
+        result[i] = new double[DataSize + 4];
+
+        for (int j = 0; j < DataSize + 4; j++)
+        {
+            result[i][j] = 0;
+        }
+    }
     return 0;
 }
