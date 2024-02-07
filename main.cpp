@@ -14,11 +14,12 @@ using namespace std::chrono;
 double runtime = 0;
 int DataSize = 0;
 double totalLands = 0;
-double** result;
-double* Lands;
-struct MyParam {
-    DWORD threadID; 
-    double* localResult;
+double **result;
+double *Lands;
+struct MyParam
+{
+    DWORD threadID;
+    double *localResult;
 };
 
 int main()
@@ -71,5 +72,23 @@ int main()
             result[i][j] = 0;
         }
     }
+
+    MyParam *threadParams = new MyParam[threadCount];
+    HANDLE *threadHandle = new HANDLE[threadCount];
+
+    for (int i = 0; i < threadCount; i++)
+    {
+        threadParams[i].threadID = i + 1;
+        threadParams[i].localResult = result[i];
+
+        threadHandle[i] = CreateThread(NULL, 0, F, &threadParams[i], 0, NULL);
+
+        if (!threadHandle[i])
+        {
+            cout << "Could not create thread, program will terminate." << endl;
+            exit(1);
+        }
+    }
+
     return 0;
 }
