@@ -22,6 +22,8 @@ struct MyParam
     double *localResult;
 };
 
+DWORD WINAPI F(LPVOID param);
+
 int main()
 {
     string filename;
@@ -91,4 +93,9 @@ int main()
     }
 
     return 0;
+}
+
+
+DWORD WINAPI F(LPVOID param) {
+    
 }
