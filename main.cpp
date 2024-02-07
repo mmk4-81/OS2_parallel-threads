@@ -12,7 +12,8 @@ using namespace std::chrono;
 #define Filepath "\\dataset\\"
 
 double runtime = 0;
-
+int DataSize = 0;
+double totalLands = 0;
 
 int main()
 {
@@ -32,6 +33,16 @@ int main()
 
     int threadCount = thread::hardware_concurrency();
 
+    double number;
+    while (file >> number)
+    {
+        DataSize++;
+        totalLands += number;
+    }
+
+    cout << endl
+         << "dataset " << filename << " with " << DataSize << " records and runtime " << runtime << " seconds and with " << threadCount << " threads" << endl
+         << endl;
 
 
 
