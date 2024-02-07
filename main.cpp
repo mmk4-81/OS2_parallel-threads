@@ -16,6 +16,10 @@ int DataSize = 0;
 double totalLands = 0;
 double** result;
 double* Lands;
+struct MyParam {
+    DWORD threadID; 
+    double* localResult;
+};
 
 int main()
 {
