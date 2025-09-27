@@ -1,4 +1,4 @@
-## آبان 1402
+## November 2023
 
 # OS_2 : parallel threads
 - There are data in each dataset, each data is the size of a land.
